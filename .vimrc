@@ -1,5 +1,6 @@
-call plug#begin('~/.vim/plugged')
 
+call plug#begin('~/.vim/plugged')
+Plug 'flrnd/candid.vim'
 " Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
@@ -47,6 +48,11 @@ Plug 'wokalski/autocomplete-flow'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+" Testing syntax and colorscheme
+" set background=dark
+" syntax on
+" colorscheme candid
 
 " NERDTree settings
 map <C-K><C-B> :NERDTreeToggle<CR>
@@ -160,8 +166,8 @@ set ttyfast " Will send characters over a terminal connection faster. We do have
 set ruler " Always show current cursor position, which might be needed for the character column location.
 set hidden " Abandon buffer when closed, which is usually what we want to do in this case.
 set lazyredraw " Good performance boost when executing macros, redraw the screen only on certain commands.
-set backspace=2 " Used for making backspace work like in most other editors (e.g. removing a single indent).
-
+" set backspace=2 " Used for making backspace work like in most other editors (e.g. removing a single indent).
+set backspace=indent,eol,start
 set undodir=~/.vim/undodir " Where do we store all this awesomeness?!?!
 set undofile " Persistent undos are completely freaking awesome!!!
 set noswapfile " Don't create swap files, nowadays we should have enough memory to store a text file.
@@ -218,28 +224,3 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " YouCompleteMe go to definition
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-
-hi default CocUnderline    cterm=underline 
-hi default CocErrorSign    ctermfg=LightRed     
-hi default CocWarningSign  ctermfg=LightRed   
-hi default CocInfoSign     ctermfg=LightRed  
-hi default CocHintSign     ctermfg=LightRed    
-hi default CocSelectedText ctermfg=Red     
-hi default CocCodeLens     ctermfg=Gray    
-hi default link CocErrorFloat       CocErrorSign
-hi default link CocWarningFloat     CocWarningSign
-hi default link CocInfoFloat        CocInfoSign
-hi default link CocHintFloat        CocHintSign
-hi default link CocErrorHighlight   CocUnderline
-hi default link CocWarningHighlight CocUnderline
-hi default link CocInfoHighlight    CocUnderline
-hi default link CocHintHighlight    CocUnderline
-hi default link CocListMode ModeMsg
-hi default link CocListPath Comment
-hi CocFloating ctermbg=DarkGray
-hi default link CocHighlightText  CursorColumn
-
-hi default link CocHoverRange     Search
-hi default link CocCursorRange    Search
-hi default link CocHighlightRead  CocHighlightText
-hi default link CocHighlightWrite CocHighlightText
