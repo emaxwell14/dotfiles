@@ -1,52 +1,50 @@
-set encoding=utf8
-
 call plug#begin('~/.vim/plugged')
 
-"
-" Install plugins here
-"
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-Plug 'ivalkeen/vim-ctrlp-tjump'
-Plug 'heavenshell/vim-prettier'
+" Plug 'ivalkeen/vim-ctrlp-tjump'
+" Plug 'heavenshell/vim-prettier'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
-Plug 'w0rp/ale'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" Plug 'w0rp/ale'
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 Plug 'wokalski/autocomplete-flow'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 
-Plug 'steelsojka/deoplete-flow'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'jeffkreeftmeijer/vim-dim'
-Plug 'yegappan/greplace'
-Plug 'wakatime/vim-wakatime'
-Plug 'airblade/vim-gitgutter'
-Plug 'tmhedberg/matchit'
-Plug 'miyakogi/conoline.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'takac/vim-hardtime'
-Plug 'terryma/vim-multiple-cursors'
-"Plug 'vim-scripts/indentpython.vim'
+" Plug 'steelsojka/deoplete-flow'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'jeffkreeftmeijer/vim-dim'
+" Plug 'yegappan/greplace'
+" Plug 'wakatime/vim-wakatime'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'tmhedberg/matchit'
+" Plug 'miyakogi/conoline.vim'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'takac/vim-hardtime'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'vim-scripts/indentpython.vim'
 " Plug 'Valloric/YouCompleteMe'
-Plug 'nvie/vim-flake8'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'nvie/vim-flake8'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -75,20 +73,20 @@ let g:ctrlp_custom_ignore = {
 " Use .agignore (with .gitignore syntax) to ignore files
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' 
 
-set mouse=a
+" set mouse=a
 
-" Run prettier automatically
-autocmd BufWritePost *.js,*.jsx call prettier#run(1)
+" heavenshell/prettier Run prettier automatically
+" autocmd BufWritePost *.js,*.jsx call prettier#run(1)
 
 " Use system clipboard for
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " Emmet stuff
-let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+" let g:user_emmet_settings = {
+"   \  'javascript.jsx' : {
+"     \      'extends' : 'jsx',
+"     \  },
+"   \}
 
 " Fix linting in flow files
 let g:ale_linters = { 
@@ -96,33 +94,33 @@ let g:ale_linters = {
 \}
 
 
-let g:deoplete#enable_at_startup = 1
-let g:neosnippet#enable_completed_snippet = 1
+" let g:deoplete#enable_at_startup = 1
+" let g:neosnippet#enable_completed_snippet = 1
 
-"set cursorline
-"hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE
+" set cursorline
+" hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE
 
 let g:ctrlp_show_hidden = 1
 
 :set number relativenumber
 
 " Line numbers
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+" :augroup numbertoggle
+" :  autocmd!
+" :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+" :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" :augroup END
 
 
 "- Git-Gutter -"
 " stolen from here https://gitlab.com/Sacules/dotfiles/blob/master/nvim/.config/nvim/init.vim
 " Better glyphs
-let g:gitgutter_sign_added='➕'
-let g:gitgutter_sign_modified='✍️'
-let g:gitgutter_sign_removed='🚮'
-let g:gitgutter_sign_removed_first_line='🚮'
-let g:gitgutter_sign_modified_removed='✍️'
-let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_sign_added='➕'
+" let g:gitgutter_sign_modified='✍️'
+" let g:gitgutter_sign_removed='🚮'
+" let g:gitgutter_sign_removed_first_line='🚮'
+" let g:gitgutter_sign_modified_removed='✍️'
+" let g:gitgutter_override_sign_column_highlight = 0
 
 " Removing background for a e s t h e t i c s
 hi! GitGutterAdd ctermbg=NONE
@@ -137,7 +135,7 @@ hi VertSplit ctermbg=NONE
 hi CursorLineNr ctermbg=NONE ctermfg=7
 
 
-"--- Searching ---"
+" --- Searching ---
 " Search as characters are entered
 set incsearch
 
