@@ -6,13 +6,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 " Plug 'ivalkeen/vim-ctrlp-tjump'
 " Plug 'heavenshell/vim-prettier'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'yarn install',
+"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 " if has('nvim')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " else
@@ -51,8 +51,8 @@ call plug#end()
 
 " Testing syntax and colorscheme
 " set background=dark
-" syntax on
-" colorscheme candid
+syntax on
+colorscheme desert
 
 " NERDTree settings
 map <C-K><C-B> :NERDTreeToggle<CR>
@@ -93,12 +93,6 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "     \      'extends' : 'jsx',
 "     \  },
 "   \}
-
-" Fix linting in flow files
-let g:ale_linters = { 
-\'javascript': ['flow', 'eslint'],
-\}
-
 
 " let g:deoplete#enable_at_startup = 1
 " let g:neosnippet#enable_completed_snippet = 1
@@ -189,13 +183,29 @@ set statusline+=\ %f
 set statusline+=%#VertSplit#
 set statusline+=\ ─\ %p%%\ 
 
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '✗'
+" Fix linting in flow files
+let g:ale_linters = { 
+\'javascript': ['flow', 'eslint'],
+\}
+
+" Fix files with prettier, and then ESLint.
+let g:ale_fixers = {
+\'javascript': ['eslint'],
+\}
+
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+" let g:ale_sign_warning = '✗'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_set_highlights = 0
+
+"highlight ALEErrorSign ctermbg=NONE ctermfg=red
+"highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-hi ALEErrorSign ctermfg=Red
-highlight ALEWarning cterm=bold ctermbg=Black ctermfg=Red
-highlight ALEError cterm=bold ctermbg=Black ctermfg=Red
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
