@@ -13,13 +13,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'w0rp/ale'
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
+"Plug 'tpope/vim-fugitive'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'wokalski/autocomplete-flow'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
@@ -75,10 +76,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(env|git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|pyc|swp)$',
   \ }
-" Use ag to speed up CtrlP
-" Use .agignore (with .gitignore syntax) to ignore files
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' 
-
 " set mouse=a
 
 " heavenshell/prettier Run prettier automatically
@@ -94,13 +91,31 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 "     \  },
 "   \}
 
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 " let g:neosnippet#enable_completed_snippet = 1
 
 " set cursorline
 " hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE
 
 let g:ctrlp_show_hidden = 1
+
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
 
 :set number relativenumber
 
@@ -233,4 +248,3 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " YouCompleteMe go to definition
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
